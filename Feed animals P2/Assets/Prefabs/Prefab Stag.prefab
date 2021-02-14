@@ -259,6 +259,8 @@ GameObject:
   - component: {fileID: 2760058792328427474}
   - component: {fileID: 2760058792328427478}
   - component: {fileID: 2760058792328427479}
+  - component: {fileID: 3518874903749692700}
+  - component: {fileID: -3545271914743601895}
   m_Layer: 0
   m_Name: Prefab Stag
   m_TagString: Untagged
@@ -333,7 +335,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2760058793321665940}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.12494417, y: 0.45435214, z: 0.38369215}
@@ -351,6 +353,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!65 &3518874903749692700
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760058793321665940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12494417, y: 0.45435214, z: 0.38369215}
+  m_Center: {x: 0.00010000576, y: 0.23254456, z: 0.043211937}
+--- !u!114 &-3545271914743601895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760058793321665940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbdbc16dbb269041ac34ba489af596a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topBound: 35
+  lowerBound: -15
 --- !u!1 &2760058793321669970
 GameObject:
   m_ObjectHideFlags: 0
