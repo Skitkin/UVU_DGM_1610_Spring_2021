@@ -7,6 +7,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public float speed;
     private GameObject focalPoint;
+    
+    public bool hasPowerup;
+    public float powerupStrength = 16.0f;
+
+    public GameObject powerupIndicator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +25,42 @@ public class PlayerController : MonoBehaviour
     {
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * Time.deltaTime);
+
+        powerupIndicator.transform.position = transform.position + new Vector3 (0, 0.5f,0);
+    }
+//allows to pick up and remove powerup item
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+            Debug.Log("Powerup Collected!");
+
+            StartCoroutine(PowerupCountdownRoutine());
+
+            powerupIndicator.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy") && hasPowerup)
+        {
+            //Gets the Enemies rigidbody component so we have access to its physics props
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            //Get position of the enemy in relation to the player
+            Vector3 awayFromplayer = (collision.gameObject.transform.position - transform.position);
+            // Report player collision with pick up
+           Debug.Log("Player has collided with " + collision.gameObject + " with powerup set to "+ hasPowerup);
+           // On Collision kicks enemy back
+           enemyRigidbody. AddForce(awayFromplayer * powerupStrength, ForceMode.Impulse);
+        }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7); hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 }
